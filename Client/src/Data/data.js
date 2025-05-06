@@ -1,0 +1,51 @@
+export const fakeStudents = [
+  {
+    id: 1,
+    name: "Harsh Kumar",
+    email: "smth.harsh@gmail.com",
+    rollNo: "24MCAN0306",
+    course: "MCA",
+    section: "E",
+    password: "hk!Y1",
+    placementRegistered: true,
+  },
+  {
+    id: 2,
+    name: "Raushan Kumar",
+    email: "smth.roshan@gmail.com",
+    rollNo: "24BCAN0300",
+    course: "BCA",
+    section: "A",
+    password: "rk!Y2",
+    placementRegistered: false,
+  },
+  {
+    id: 3,
+    name: "Ankit Gupta",
+    email: "smth.ankit@gmail.com",
+    rollNo: "24BCON1000",
+    course: "BTech.",
+    section: "B",
+    password: "ag!Y3",
+    placementRegistered: false,
+  },
+  {
+    id: 4,
+    name: "Devang Sharma",
+    email: "smth.devang@gmail.com",
+    rollNo: "24MCON0306",
+    course: "MTech.",
+    section: "C",
+    password: "ds!Y4",
+    placementRegistered: false,
+  },
+];
+export const fakeAdmin = [
+  {
+    id: 1,
+    name: "Kapil Dev Bhardwaj",
+    email: "kapildev@gmail.com",
+    school: "Computer Applications",
+    password: "kd!Y1",
+  },
+];

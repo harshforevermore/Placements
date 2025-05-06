@@ -1,0 +1,48 @@
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../Context/AuthContext";
+import { GoSidebarExpand } from "react-icons/go";
+import { GoSidebarCollapse } from "react-icons/go";
+import SidePanelIcons from "./SidePanelIcons";
+
+const SidePanel = (props) => {
+  const { userType } = useContext(AuthContext);
+  const [expanded, setExpanded] = useState(false);
+  const [hover, setHover] = useState(false);
+  
+  return (
+    <div
+      onMouseOver={() => setHover(true)}
+      onMouseOut={() => setHover(false)}
+      tabIndex={0}
+      onFocus={() => setExpanded(true)}
+      onBlur={() => setExpanded(false)}
+      className="side-panel-container fixed top-16 left-0 z-30 min-h-full bg-white shadow-[0_0_3px_gray]"
+    >
+      <div className={`expand-collapse-container py-1 border-b-1 border-gray-500 opacity-0 transition-all duration-300 ease-in-out ${hover && 'opacity-100'}`}>
+        {hover && expanded == false && (
+          <GoSidebarExpand
+            onClick={() => setExpanded(true)}
+            className="w-8 h-8 rotate-180 text-gray-800 place-self-end cursor-pointer"
+          />
+        )}
+        {hover && expanded == true && (
+          <GoSidebarCollapse
+            onClick={() => setExpanded(false)}
+            className="w-8 h-8 rotate-180 text-gray-800 place-self-end cursor-pointer"
+          />
+        )}
+      </div>
+      <div
+        className={`icons-container h-full ${
+          !expanded && "w-10 md:w-12 xl:w-14"
+        } ${
+          expanded && "w-40"
+        } pt-1 mt-0 transition-all duration-300 ease-in-out${hover && 'mt-2'}`}
+      >
+        <SidePanelIcons displayScreen={props.displayScreen} expanded={expanded} userType={userType} />
+      </div>
+    </div>
+  );
+};
+
+export default SidePanel;
