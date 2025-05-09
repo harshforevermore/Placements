@@ -1,10 +1,11 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { fakeStudents, fakeAdmin } from "../Data/data";
+// import { fakeStudents, fakeAdmin } from "../Data/data";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
+import axios from "axios";
 
-const LoginComponent = ({fancy}) => {
+const LoginComponent = ({ fancy }) => {
   // useContext hook
   const { login } = useContext(AuthContext);
 
@@ -22,59 +23,87 @@ const LoginComponent = ({fancy}) => {
   //UseState hooks
   const [userNotFound, setUserNotFound] = useState(false);
 
-  function checkData(data) {
-    const rollNoPattern = /[0-9]{2}[a-zA-Z]{4}\d{4}$/;
-    if (rollNoPattern.test(data.username)) {
-      return true;
-    }
-    return false;
-  }
+  // function checkData(data) {
+  //   const rollNoPattern = /[0-9]{2}[a-zA-Z]{4}\d{4}$/;
+  //   if (rollNoPattern.test(data.username)) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
   function showUserNotFound() {
     setUserNotFound(true);
     setTimeout(() => {
       setUserNotFound(false);
     }, 3000);
   }
-  const onSubmit = (data) => {
-    if (!checkData(data)) {
-      const admin = fakeAdmin.filter(
-        (adm) => adm.email === data.username && adm.password === data.password
+  const onSubmit = async (data) => {
+    try {
+      const userData = {
+        regNo: data.username,
+        password: data.password,
+      };
+      const response = await axios.post(
+        "http://192.168.182.57:8080/auth/login",
+        JSON.stringify(userData),
+        {
+          headers: { "Content-type": "application/json" },
+        }
       );
-      if (admin.length > 0) {
-        setUserNotFound(false);
-        login({ username: admin.at(0).name, userType: "admin" });
-        navigate("/home");
-      } else {
+      if(response.status == 404) {
         showUserNotFound();
+        throw new Error(`User Not Found!`);
       }
-      return;
+      else if (!(response.status >= 200 && response.status < 300)) {
+        throw new Error(
+          `Server Error: ${response.status}, ${response.statusText}`
+        );
+      }
+      console.info("worked");
+      login(response.data);
+      navigate("/home");
+      console.log(response);
+    } catch (err) {
+      console.error("Error: ", err);
     }
-    if (!sessionStorage.getItem("registerationData")) {
-      const student = fakeStudents.filter(
-        (student) =>
-          student.rollNo.toLowerCase() === data.username.toLowerCase() &&
-          student.password === data.password
-      );
-      if (student.length > 0) {
-        setUserNotFound(false);
-        login({ username: data.username, userType: "student" });
-        navigate("/home");
-      } else {
-        showUserNotFound();
-      }
-    } else {
-      const registerationData = JSON.parse(
-        sessionStorage.getItem("registerationData")
-      );
-      if (
-        registerationData.rollNo === data.username &&
-        registerationData.password === data.password
-      ) {
-        setUserNotFound(false);
-        login({ username: registerationData.rollNo, userType: "student" , registeredLogin: true });
-        navigate("/home");
-      }
-    }
+    // if (!checkData(data)) {
+    //   const admin = fakeAdmin.filter(
+    //     (adm) => adm.email === data.username && adm.password === data.password
+    //   );
+    //   if (admin.length > 0) {
+    //     setUserNotFound(false);
+    //     login({ username: admin.at(0).name, userType: "admin" });
+    //     navigate("/home");
+    //   } else {
+    //     showUserNotFound();
+    //   }
+    //   return;
+    // }
+    // if (!sessionStorage.getItem("registerationData")) {
+    //   const student = fakeStudents.filter(
+    //     (student) =>
+    //       student.rollNo.toLowerCase() === data.username.toLowerCase() &&
+    //       student.password === data.password
+    //   );
+    //   if (student.length > 0) {
+    //     setUserNotFound(false);
+    //     login({ username: data.username, userType: "student" });
+    //     navigate("/home");
+    //   } else {
+    //     showUserNotFound();
+    //   }
+    // } else {
+    //   const registerationData = JSON.parse(
+    //     sessionStorage.getItem("registerationData")
+    //   );
+    //   if (
+    //     registerationData.rollNo === data.username &&
+    //     registerationData.password === data.password
+    //   ) {
+    //     setUserNotFound(false);
+    //     login({ username: registerationData.rollNo, userType: "student" , registeredLogin: true });
+    //     navigate("/home");
+    //   }
+    // }
   };
 
   const requiredMessage = "This Field is Required";

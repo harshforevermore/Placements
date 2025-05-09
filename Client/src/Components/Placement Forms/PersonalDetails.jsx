@@ -17,6 +17,7 @@ const PersonalDetails = () => {
         patternMessage="Only aphabets allowed"
       />
       <Input
+      label="Father's Name"
         name="fatherName"
         placeholder="Father's Name"
         minLength={2}
@@ -25,6 +26,7 @@ const PersonalDetails = () => {
         patternMessage="Only aplhabets allowed"
       />
       <Input
+      label="Mother's Name"
         name="motherName"
         placeholder="Mother's Name"
         minLength={2}
@@ -33,8 +35,9 @@ const PersonalDetails = () => {
         patternMessage="Only aplhabets allowed"
       />
       <Input
+      label="Date of Birth: "
+      labelFixed={true}
         name="DOB"
-        label="Date of Birth: "
         placeholder="Date Of Birth"
         type="date"
         minLength="1900-01-01"
@@ -46,22 +49,25 @@ const PersonalDetails = () => {
         options={["Male", "Female", "Others"]}
       />
       <Input
+        label="Birth Place"
         name="birthPlace"
         placeholder="Birth Place"
         minLength={2}
         maxLength={50}
         pattern={/^[A-Za-z\s]+$/}
         patternMessage="Only alphabets allowed"
-      />
+        />
       <Input
+        label="Personal Mobile Number"
         name="personalMobileNo"
         placeholder="Personal Mobile Number"
         minLength={10}
         maxLength={10}
         pattern={/^[6-9]\d{9}$/}
         patternMessage="Invalid Number"
-      />
+        />
       <Input
+        label="Personal Email"
         name="personalEmail"
         type="email"
         placeholder="Personal Email"
@@ -71,6 +77,7 @@ const PersonalDetails = () => {
         patternMessage="Invalid Email"
       />
       <Input
+        label="Father's Mobile Number"
         name="fatherMobileNumber"
         placeholder="Father's Mobile Number"
         minLength={10}
@@ -79,6 +86,7 @@ const PersonalDetails = () => {
         patternMessage="Invalid Number"
       />
       <Input
+        label="Alternate Mobile Number"
         name="alternateMobileNumber"
         required={false}
         placeholder="Alternate Mobile Number"
@@ -88,38 +96,43 @@ const PersonalDetails = () => {
         patternMessage="Invalid Number"
       />
       <Input
-        name="aadhaarNumber"
-        placeholder="Aadhaar Number"
+      label="Aadhaar Number"
+      name="aadhaarNumber"
+      placeholder="Aadhaar Number"
         minLength={12}
         maxLength={12}
         pattern={/^\d{12}$/}
         patternMessage="Invalid Aadhar Number"
       />
       <Input
-        name="PANCardNumber"
-        placeholder="PAN Card Number"
-        minLength={10}
+      label="PAN Card Number"
+      name="PANCardNumber"
+      placeholder="PAN Card Number"
+      minLength={10}
         maxLength={10}
         pattern={/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/}
         patternMessage="Invalid PAN Number"
       />
       <Input
-        name="presentAddress"
-        placeholder="Present Address"
+      label="Present Address"
+      name="presentAddress"
+      placeholder="Present Address"
         minLength={10}
         maxLength={255}
         pattern={/^[A-Za-z0-9\s,.-/]{10,255}$/}
         patternMessage="Invalid Address"
       />
       <Input
-        name="permanentAadhaarAddress"
-        placeholder="Permanent Address as per Aadhaar Card"
+      label="Permanent Address as per Aadhaar Card"
+      name="permanentAadhaarAddress"
+      placeholder="Permanent Address as per Aadhaar Card"
         minLength={10}
         maxLength={255}
         pattern={/^[A-Za-z0-9\s,.-/]{10,255}$/}
         patternMessage="Invalid Address"
-      />
+        />
       <Input
+        label="Current Location (City/Town)"
         name="currentLocation"
         placeholder="Current Location (City/Town)"
         minLength={2}

@@ -28,7 +28,7 @@ const RegisterComponent = () => {
   const navigate = useNavigate();
   const onSubmit = async (data) => {
     const registerationData = {
-      name: data.name,
+      fullName: data.name,
       regNo: data.username,
       collegeEmail: data.email,
       course: data.course,
@@ -39,7 +39,7 @@ const RegisterComponent = () => {
       const response = await axios.post("http://192.168.182.57:8080/user-register",JSON.stringify(registerationData),{
         headers: {"Content-type": "application/json"}
       });
-      if(response.status == 201) {
+      if(response.ok) {
         navigate("/login");
       }
     }
@@ -66,7 +66,7 @@ const RegisterComponent = () => {
           Create Account
         </h1>
         {serverErr && (
-        <span className="userNotFound w-fit py-0.5 px-2 rounded-md bg-[#ff0000] text-xl text-white font-bold animate-reveal">
+        <span className="server-error w-fit py-0.5 px-2 rounded-md bg-[#ff0000] text-xl text-white font-bold animate-reveal">
           {serverErr}
         </span>
       )}

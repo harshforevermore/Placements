@@ -3,7 +3,7 @@ import PlacementRegistration from "./PlacementRegistration";
 
 const Details = () => {
   const placementRegistered = JSON.parse(
-    sessionStorage.getItem("userDetails")
+    sessionStorage.getItem("user")
   ).placementRegistered;
   return (
     <div className="details-container">

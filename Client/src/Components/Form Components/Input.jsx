@@ -1,12 +1,13 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { useFormContext } from "react-hook-form";
 
 const Input = ({
   name,
   label,
+  labelFixed = false,
   required=true,
   type = "text",
-  placeholder = "",
+  // placeholder = "",
   autocomplete = "off",
   minLength,
   maxLength,
@@ -19,33 +20,27 @@ const Input = ({
 }) => {
   const {
     register,
-    watch,
     formState: { errors },
   } = useFormContext();
 
   const [isFocused, setIsFocused] = useState(false);
-  function handleChange(e) {
-    if(e.target.value !== "") {
-      setIsFocused(true);
-    }
-    if(e.target.value === "" && e.target.onblur) {
-      setIsFocused(false);
-    }
-  }
   
   return (
     <div className={`${name}-container flex flex-col`}>
-      <div className="input-container relative flex items-center gap-2">
+      <div className="input-container relative flex items-center gap-2"
+      onFocus={() => !isFocused && setIsFocused(true)}
+      onBlur={(e) => {!isFocused && e.target.value != "" ? setIsFocused(true) : setIsFocused(false)}}>
         {label && (
           <label
-            htmlFor={name}
-            className={`input-label absolute ${isFocused ? 'left-[.55em] -top-1/3 bg-white px-1' : 'left-[.55em] top-[.5em]'} text-lg font-medium text-nowrap transition-all duration-150 ease-in-out`}
+            htmlFor={`${name}-field`}
+            className={`input-label absolute ${labelFixed ? 'left-[.55em] -top-1/3 bg-white px-1' : isFocused ? 'left-[.55em] -top-1/3 bg-white px-1' : 'left-[.55em] top-[.5em]'} cursor-text text-lg font-medium text-nowrap transition-all duration-150 ease-in-out`}
           >
             {label}
           </label>
         )}
         <input
           {...register(name, {
+            
             required : {value: required, message: "This field is required"},
             minLength: minLength
               ? {
@@ -66,8 +61,7 @@ const Input = ({
               ? (value) => validation(value) || validationMessage
               : undefined,
           })}
-          onFocus={() => setIsFocused(true)}
-          onChange={(e) => handleChange(e)}
+          
           type={type}
           id={`${name}-field`}
           className={`w-full p-2 text-lg border-2 border-gray-600 rounded-md hover:border-b-2 focus:shadow-[0_0_5px_gray] focus:outline-none

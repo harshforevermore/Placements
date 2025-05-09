@@ -1,5 +1,5 @@
 import { useState, useEffect, createContext } from "react";
-import { fakeAdmin, fakeStudents } from "../Data/data";
+// import { fakeAdmin, fakeStudents } from "../Data/data";
 
 export const AuthContext = createContext();
 
@@ -14,54 +14,63 @@ export const AuthProvider = ({ children }) => {
     try {
       if (storedUser) {
         setUser(storedUser);
-        setUserType(storedUser.userType);
+        setUserType(storedUser.role);
       }
     } catch (err) {
       console.error("Error while parsing stored user: ", err);
       sessionStorage.removeItem("user");
-      sessionStorage.removeItem("userDetails");
+      // sessionStorage.removeItem("userDetails");
     }
     setLoading(false);
   }, []);
 
-  function getUserDetails(data) {
-    let userDetails;
-    if(data.userType === "student"){
-      userDetails = fakeStudents.find(
-        (detail) => detail.rollNo.toLowerCase() === data.username.toLowerCase()
-      );
-    }
-    else {
-      userDetails = fakeAdmin.find(detail => detail.email === data.username);
-    }
-    return userDetails;
+  // function getUserDetails(data) {
+  //   let userDetails;
+  //   if(data.userType === "student"){
+  //     userDetails = fakeStudents.find(
+  //       (detail) => detail.rollNo.toLowerCase() === data.username.toLowerCase()
+  //     );
+  //   }
+  //   else {
+  //     userDetails = fakeAdmin.find(detail => detail.email === data.username);
+  //   }
+  //   return userDetails;
+  // }
+  function login(data) {
+    setUserType(data.role);
+    setUser(data);
+    sessionStorage.setItem(
+      "user", JSON.stringify(data)
+    );
   }
-  function login(userData) {
-    setUserType(userData.userType);
-    // setting the user and user details in the local storage
-    if (!userData.registeredLogin) {
-      setUser(userData);
-      sessionStorage.setItem("user", JSON.stringify({username: userData.username, userType: userData.userType}));
-      const userDetails = getUserDetails({username: userData.username, userType: userData.userType});
-      sessionStorage.setItem("userDetails", JSON.stringify(userDetails));
-    } else {
-      setUser({ username: userData.username, userType: userData.userType });
-      sessionStorage.setItem(
-        "user",
-        JSON.stringify({ username: userData.username, userType: userData.userType })
-      );
-      const userDetails = sessionStorage.getItem("registerationData");
-      sessionStorage.setItem("userDetails", userDetails);
-    }
-  }
+  // function login(userData) {
+  //   setUserType(userData.userType);
+  //   // setting the user and user details in the local storage
+  //   if (!userData.registeredLogin) {
+  //     const {course, email, fullname, regNo} = userData;
+  //     console.log(userData);
+  //     setUser(userData);
+  //     sessionStorage.setItem("user", JSON.stringify({fullName: fullname, regNo: regNo, course: course}));
+  //     // const userDetails = getUserDetails({username: userData.username, userType: userData.userType});
+  //     // sessionStorage.setItem("userDetails", JSON.stringify(userDetails));
+  //   } else {
+  //     setUser({ username: userData.username, userType: userData.userType });
+  //     sessionStorage.setItem(
+  //       "user",
+  //       JSON.stringify({ username: userData.username, userType: userData.userType })
+  //     );
+  //     const userDetails = sessionStorage.getItem("registerationData");
+  //     sessionStorage.setItem("userDetails", userDetails);
+  //   }
+  // }
 
   function logout() {
     // removing the user data stored in the local storage
     setUser(undefined);
     setUserType("");
     sessionStorage.removeItem("user");
-    sessionStorage.removeItem("userDetails");
-    sessionStorage.removeItem("registerationData");
+    // sessionStorage.removeItem("userDetails");
+    // sessionStorage.removeItem("registerationData");
   }
   return (
     <AuthContext.Provider value={{ user, userType, login, logout }}>
