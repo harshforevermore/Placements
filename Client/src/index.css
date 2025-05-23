@@ -9,3 +9,46 @@ body {
   box-sizing: border-box;
   user-select: none;
 }
+
+
+#notification {
+  animation: notification 3s 50ms normal ease-in-out alternate;
+}
+@keyframes notification {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  15% {
+    transform: translateX(0);
+    opacity: .9;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+#loader-dot-4 {
+  animation: loader .8s 50ms infinite cubic-bezier(0.42, 0, 0, 0.11) alternate;
+}
+#loader-dot-3 {
+  animation: loader .8s 100ms infinite cubic-bezier(0.42, 0, 0, 0.11) alternate;
+}
+#loader-dot-2 {
+  animation: loader .8s 200ms infinite cubic-bezier(0.42, 0, 0, 0.11) alternate;
+}
+#loader-dot-1 {
+  animation: loader .8s 300ms infinite cubic-bezier(0.42, 0, 0, 0.11) alternate;
+}
+@keyframes loader {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-90%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

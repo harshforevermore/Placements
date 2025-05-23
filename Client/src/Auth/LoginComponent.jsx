@@ -1,13 +1,16 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-// import { fakeStudents, fakeAdmin } from "../Data/data";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
+import { useLoader } from "../Context/LoaderContext";
+import { useNotification } from "../Context/NotificationContext";
 
 const LoginComponent = ({ fancy }) => {
   // useContext hook
   const { login } = useContext(AuthContext);
+  const {showNotification} = useNotification();
+  const {showLoader, hideLoader} = useLoader();
 
   // useNavigate hook
   const navigate = useNavigate();
@@ -23,13 +26,6 @@ const LoginComponent = ({ fancy }) => {
   //UseState hooks
   const [userNotFound, setUserNotFound] = useState(false);
 
-  // function checkData(data) {
-  //   const rollNoPattern = /[0-9]{2}[a-zA-Z]{4}\d{4}$/;
-  //   if (rollNoPattern.test(data.username)) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
   function showUserNotFound() {
     setUserNotFound(true);
     setTimeout(() => {
@@ -37,6 +33,7 @@ const LoginComponent = ({ fancy }) => {
     }, 3000);
   }
   const onSubmit = async (data) => {
+    showLoader();
     try {
       const userData = {
         regNo: data.username,
@@ -59,51 +56,15 @@ const LoginComponent = ({ fancy }) => {
         );
       }
       console.info("worked");
+      showNotification("Logged In Successfully", "success");
       login(response.data);
       navigate("/home");
+      hideLoader();
       console.log(response);
     } catch (err) {
       console.error("Error: ", err);
+      hideLoader();
     }
-    // if (!checkData(data)) {
-    //   const admin = fakeAdmin.filter(
-    //     (adm) => adm.email === data.username && adm.password === data.password
-    //   );
-    //   if (admin.length > 0) {
-    //     setUserNotFound(false);
-    //     login({ username: admin.at(0).name, userType: "admin" });
-    //     navigate("/home");
-    //   } else {
-    //     showUserNotFound();
-    //   }
-    //   return;
-    // }
-    // if (!sessionStorage.getItem("registerationData")) {
-    //   const student = fakeStudents.filter(
-    //     (student) =>
-    //       student.rollNo.toLowerCase() === data.username.toLowerCase() &&
-    //       student.password === data.password
-    //   );
-    //   if (student.length > 0) {
-    //     setUserNotFound(false);
-    //     login({ username: data.username, userType: "student" });
-    //     navigate("/home");
-    //   } else {
-    //     showUserNotFound();
-    //   }
-    // } else {
-    //   const registerationData = JSON.parse(
-    //     sessionStorage.getItem("registerationData")
-    //   );
-    //   if (
-    //     registerationData.rollNo === data.username &&
-    //     registerationData.password === data.password
-    //   ) {
-    //     setUserNotFound(false);
-    //     login({ username: registerationData.rollNo, userType: "student" , registeredLogin: true });
-    //     navigate("/home");
-    //   }
-    // }
   };
 
   const requiredMessage = "This Field is Required";

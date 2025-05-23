@@ -20,20 +20,24 @@ const Input = ({
 }) => {
   const {
     register,
+    watch,
     formState: { errors },
   } = useFormContext();
 
-  const [isFocused, setIsFocused] = useState(false);
+  const inputData = watch(name);
+
+  // const [isFocused, setIsFocused] = useState(false);
+  const [labelUp, setLabelUp] = useState(false);
   
   return (
     <div className={`${name}-container flex flex-col`}>
       <div className="input-container relative flex items-center gap-2"
-      onFocus={() => !isFocused && setIsFocused(true)}
-      onBlur={(e) => {!isFocused && e.target.value != "" ? setIsFocused(true) : setIsFocused(false)}}>
+      onFocus={() => setLabelUp(true)}
+      onBlur={() => {inputData ? setLabelUp(true) : setLabelUp(false)}}>
         {label && (
           <label
             htmlFor={`${name}-field`}
-            className={`input-label absolute ${labelFixed ? 'left-[.55em] -top-1/3 bg-white px-1' : isFocused ? 'left-[.55em] -top-1/3 bg-white px-1' : 'left-[.55em] top-[.5em]'} cursor-text text-lg font-medium text-nowrap transition-all duration-150 ease-in-out`}
+            className={`input-label absolute left-[.55em] bg-white ${labelFixed || labelUp ? '-top-1' : 'top-[1.25em]'} cursor-text text-md text-gray-700 font-medium text-nowrap shadow-[0_0_5px_4px_#fff] transition-all duration-150 ease-in-out`}
           >
             {label}
           </label>
@@ -64,7 +68,7 @@ const Input = ({
           
           type={type}
           id={`${name}-field`}
-          className={`w-full p-2 text-lg border-2 border-gray-600 rounded-md hover:border-b-2 focus:shadow-[0_0_5px_gray] focus:outline-none
+          className={`w-full my-2 p-2 text-lg border-2 border-gray-600 rounded-md hover:border-b-2 focus:shadow-[0_0_5px_gray] focus:outline-none
           ${inputClasses}
           ${errors[name] ? "border-red-600" : "border-gray-500"}`}
           step={step ? step : undefined}

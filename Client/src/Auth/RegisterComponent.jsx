@@ -39,7 +39,7 @@ const RegisterComponent = () => {
       const response = await axios.post("http://192.168.182.57:8080/user-register",JSON.stringify(registerationData),{
         headers: {"Content-type": "application/json"}
       });
-      if(response.ok) {
+      if(response.status >= 200 && response.status < 300) {
         navigate("/login");
       }
     }

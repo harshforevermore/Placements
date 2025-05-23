@@ -5,7 +5,7 @@ const FancyRegister = ({setShow}) => {
 
   const handleFormChange = () => {
     setShow("login");
-    reset();
+    // reset();
   }
 
   return (

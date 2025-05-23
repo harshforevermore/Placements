@@ -4,7 +4,7 @@ const FancyLogin = ({setShow}) => {
 
   const handleFormChange = () => {
     setShow("register");
-    reset();
+    // reset();
   }
 
   return (

@@ -1,3 +1,11 @@
+export const fakeUser = {
+  fullname: "Who Knows",
+  regNo: "24MCAN0304",
+  course: "MCA",
+  email: "smth.2@gmail.com",
+  role: "student",
+  placementRegistered: false
+};
 export const fakeStudents = [
   {
     id: 1,

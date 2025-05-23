@@ -14,7 +14,6 @@ const SidePanel = (props) => {
       onMouseOver={() => setHover(true)}
       onMouseOut={() => setHover(false)}
       tabIndex={0}
-      onFocus={() => setExpanded(true)}
       onBlur={() => setExpanded(false)}
       className="side-panel-container fixed top-16 left-0 z-30 min-h-full bg-white shadow-[0_0_3px_gray]"
     >
@@ -37,7 +36,7 @@ const SidePanel = (props) => {
           !expanded && "w-10 md:w-12 xl:w-14"
         } ${
           expanded && "w-40"
-        } pt-1 mt-0 transition-all duration-300 ease-in-out${hover && 'mt-2'}`}
+        } pt-1 mt-0 ${hover && 'mt-2'} transition-all duration-300 ease-in-out`}
       >
         <SidePanelIcons displayScreen={props.displayScreen} expanded={expanded} userType={userType} />
       </div>

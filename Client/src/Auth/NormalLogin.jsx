@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import LoginComponent from "./LoginComponent";
 
-const Login = () => {
+const NormalLogin = () => {
 
   return (
     <div className="login-container w-full h-[100vh] place-items-center place-content-center">
@@ -20,4 +20,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default NormalLogin;

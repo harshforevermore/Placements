@@ -6,7 +6,7 @@ import RadioButton from "../Form Components/RadioButton";
 const PersonalDetails = () => {
   return (
     <div className="personal-details-container bg-white w-full py-4 px-4 flex flex-col gap-2 shadow-[0_0_5px_gray] rounded-lg">
-      <h1 className="mb-4 text-2xl text-red-500 font-bold">Personal Details</h1>
+      <h1 className="mb-2 text-2xl text-red-500 font-bold">Personal Details</h1>
       <Input
       label="Name"
         name="name"
