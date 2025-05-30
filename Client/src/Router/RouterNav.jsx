@@ -8,13 +8,13 @@ import LoginPage from "../Auth/LoginPage";
 // import Loader from "../Components/Loader/Loader";
 
 const RouterNav = () => {
-  // const {user} = useContext(AuthContext);
+  const {user} = useContext(AuthContext);
 
   return (
     <>
       <Routes>
         {/* Redirecting "/" route to /login */}
-        {/* <Route path="/" element={user ? <Navigate to="/home" /> : <Navigate to="/login" />} /> */}
+        <Route path="/" element={user ? <Navigate to="/home" /> : <Navigate to="/login" />} />
 
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/login" element={<LoginPage />} />
