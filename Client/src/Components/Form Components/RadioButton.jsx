@@ -1,14 +1,14 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
-const RadioButton = ({ name = "", title = "", options = [] }) => {
+const RadioButton = ({ name = "", title = "", options = [], containerClasses="" }) => {
   const {
     register,
     trigger,
     formState: { errors },
   } = useFormContext();
   return (
-    <div className={`${name}-container flex items-center gap-4`}>
+    <div className={`${name}-container flex items-center gap-4 ${containerClasses}`}>
       <h2 className="text-lg font-medium">{title}:</h2>
       {options.map((option) => (
         <label

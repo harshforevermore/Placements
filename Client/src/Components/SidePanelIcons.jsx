@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
 import { BiEdit } from "react-icons/bi";
@@ -6,9 +6,13 @@ import { HiOutlineDocumentText } from "react-icons/hi";
 import { LuSettings } from "react-icons/lu";
 
 const SidePanelIcons = ({ displayScreen, expanded, userType }) => {
-    const [selected, setSelected] = useState(
-        userType === "student" ? { id: "Profile" } : { id: "Admin" }
-      );
+  const [selected, setSelected] = useState(
+    userType === "student" ? { id: "Profile" } : { id: "Admin" }
+  );
+  useEffect(() => {
+    console.log("Selected: ", selected);
+    sessionStorage.setItem("sidePanelTab", JSON.stringify(selected));
+  }, [selected]);
   const adminOptions = [
     {
       name: "Admin",
@@ -28,7 +32,7 @@ const SidePanelIcons = ({ displayScreen, expanded, userType }) => {
       click: (e) => setSelectedIcon(e.currentTarget.id),
     },
     {
-      name: "Details",
+      name: "User Details",
       iconName: BiEdit,
       click: (e) => setSelectedIcon(e.currentTarget.id),
     },
@@ -56,10 +60,16 @@ const SidePanelIcons = ({ displayScreen, expanded, userType }) => {
               id={option.name}
               className={`${!expanded && "w-full h-full text-4xl sm:p-2"} ${
                 expanded && "w-[40px] h-[40px] ml-1"
-              } text-gray-800 font-light transition-all duration-200 group-hover:text-white ${selected.id === option.name && "text-white"}`}
+              } text-gray-800 font-light transition-all duration-200 group-hover:text-white ${
+                selected.id === option.name && "text-white"
+              }`}
             />
             {expanded && (
-              <span className={`icon-name mr-2 text-lg font-medium transition-all duration-200 group-hover:text-white ${selected.id === option.name && "text-white"}`}>
+              <span
+                className={`icon-name mr-2 text-lg font-medium transition-all duration-200 group-hover:text-white ${
+                  selected.id === option.name && "text-white"
+                }`}
+              >
                 {option.name}
               </span>
             )}
@@ -79,10 +89,16 @@ const SidePanelIcons = ({ displayScreen, expanded, userType }) => {
               id={option.name}
               className={`${!expanded && "w-full h-full text-4xl sm:p-2"} ${
                 expanded && "w-[40px] h-[40px] ml-1"
-              } text-gray-800 font-light transition-all duration-200 group-hover:text-white ${selected.id === option.name && "text-white"}`}
+              } text-gray-800 font-light transition-all duration-200 group-hover:text-white ${
+                selected.id === option.name && "text-white"
+              }`}
             />
             {expanded && (
-              <span className={`icon-name mr-2 text-lg font-medium transition-all duration-200 group-hover:text-white ${selected.id === option.name && "text-white"}`}>
+              <span
+                className={`icon-name mr-2 text-lg font-medium transition-all duration-200 group-hover:text-white ${
+                  selected.id === option.name && "text-white"
+                }`}
+              >
                 {option.name}
               </span>
             )}

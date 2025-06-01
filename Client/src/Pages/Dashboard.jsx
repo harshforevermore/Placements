@@ -17,7 +17,7 @@ const Dashboard = () => {
         {userType === "student" ? (
           <>
             {displayScreen === "Profile" && <Profile />}
-            {displayScreen === "Details" && <Details />}
+            {displayScreen === "User Details" && <Details />}
           </>
         ) : (
           <>

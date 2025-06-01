@@ -16,6 +16,7 @@ const Input = ({
   validation,
   validationMessage = "Invalid Value",
   inputClasses = "",
+  containerClasses = "",
   step,
 }) => {
   const {
@@ -30,14 +31,14 @@ const Input = ({
   const [labelUp, setLabelUp] = useState(false);
   
   return (
-    <div className={`${name}-container flex flex-col`}>
+    <div className={`${name}-container flex flex-col ${containerClasses}`}>
       <div className="input-container relative flex items-center gap-2"
       onFocus={() => setLabelUp(true)}
       onBlur={() => {inputData ? setLabelUp(true) : setLabelUp(false)}}>
         {label && (
           <label
             htmlFor={`${name}-field`}
-            className={`input-label absolute left-[.55em] bg-white ${labelFixed || labelUp ? '-top-1' : 'top-[1.25em]'} cursor-text text-md text-gray-700 font-medium text-nowrap shadow-[0_0_5px_4px_#fff] transition-all duration-150 ease-in-out`}
+            className={`input-label absolute left-[.55em] bg-white ${labelFixed || labelUp ? '-top-1' : 'top-[1.25em]'} px-[.1em] cursor-text text-md text-gray-700 font-medium text-nowrap shadow-[0_0_3px_2px_#fff] transition-all duration-150 ease-in-out`}
           >
             {label}
           </label>
@@ -68,7 +69,7 @@ const Input = ({
           
           type={type}
           id={`${name}-field`}
-          className={`w-full my-2 p-2 text-lg border-2 border-gray-600 rounded-md hover:border-b-2 focus:shadow-[0_0_5px_gray] focus:outline-none
+          className={`min-w-[100%] my-2 p-2 text-lg border-2 border-gray-600 rounded-md hover:border-b-2 focus:shadow-[0_0_5px_gray] focus:outline-none
           ${inputClasses}
           ${errors[name] ? "border-red-600" : "border-gray-500"}`}
           step={step ? step : undefined}
