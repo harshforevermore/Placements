@@ -36,7 +36,7 @@ const RegisterComponent = () => {
       role: "student"
     }
     try {
-      const response = await axios.post("http://192.168.182.57:8080/user-register",JSON.stringify(registerationData),{
+      const response = await axios.post("https://placment-b9e0ckhua7fpemgq.eastus2-01.azurewebsites.net/studentregister",JSON.stringify(registerationData),{
         headers: {"Content-type": "application/json"}
       });
       if(response.status >= 200 && response.status < 300) {

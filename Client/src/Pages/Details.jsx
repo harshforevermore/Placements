@@ -5,6 +5,7 @@ const Details = () => {
   const placementRegistered = JSON.parse(
     sessionStorage.getItem("user")
   ).placementRegistered;
+  console.log(placementRegistered);
   return (
     <div className="details-container">
       {placementRegistered ? (

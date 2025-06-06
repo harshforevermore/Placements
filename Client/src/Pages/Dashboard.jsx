@@ -13,11 +13,11 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container min-h-[calc(100vh-64px)] flex">
       <SidePanel userType={userType} displayScreen={setDisplayScreen} />
-      <div className="dash-screen flex-1 p-4">
+      <div className="dash-screen flex-1 py-2 px-2">
         {userType === "student" ? (
           <>
             {displayScreen === "Profile" && <Profile />}
-            {displayScreen === "User Details" && <Details />}
+            {displayScreen === "Student Info" && <Details />}
           </>
         ) : (
           <>

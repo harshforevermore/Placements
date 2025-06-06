@@ -14,7 +14,7 @@ const NotificationProvider = ({children}) => {
         }, timeout);
     }
   return (
-    <NotificationContext.Provider value={showNotification}>
+    <NotificationContext.Provider value={{showNotification}}>
         {children}
         {
             notification.visible && <Notification notificationText={notification.message} status={notification.status} />

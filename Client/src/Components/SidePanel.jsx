@@ -1,11 +1,9 @@
-import React, { useContext, useState } from "react";
-import { AuthContext } from "../Context/AuthContext";
+import React, { useState } from "react";
 import { GoSidebarExpand } from "react-icons/go";
 import { GoSidebarCollapse } from "react-icons/go";
 import SidePanelIcons from "./SidePanelIcons";
 
 const SidePanel = (props) => {
-  const { userType } = useContext(AuthContext);
   const [expanded, setExpanded] = useState(false);
   const [hover, setHover] = useState(false);
   
@@ -32,13 +30,10 @@ const SidePanel = (props) => {
         )}
       </div>
       <div
-        className={`icons-container h-full ${
-          !expanded && "w-10 md:w-12 xl:w-14"
-        } ${
-          expanded && "w-40"
-        } pt-1 mt-0 ${hover && 'mt-2'} transition-all duration-300 ease-in-out`}
+        className={`icons-container h-full ${expanded ? "w-[210px]" : "w-[60px] overflow-hidden"}
+          pt-1 mt-0 ${hover && 'mt-2'} transition-all duration-100 ease-out`} //${!expanded && "w-10 md:w-12 xl:w-14"} ${expanded && "w-40"}
       >
-        <SidePanelIcons displayScreen={props.displayScreen} expanded={expanded} userType={userType} />
+        <SidePanelIcons displayScreen={props.displayScreen} />
       </div>
     </div>
   );

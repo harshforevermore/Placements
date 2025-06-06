@@ -1,15 +1,20 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
 import { BiEdit } from "react-icons/bi";
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { LuSettings } from "react-icons/lu";
+import { AuthContext } from "../Context/AuthContext";
 
-const SidePanelIcons = ({ displayScreen, expanded, userType }) => {
+const SidePanelIcons = ({ displayScreen }) => {
+  const getIcon = JSON.parse(sessionStorage.getItem("sidePanelTab"));
+  const { userType } = useContext(AuthContext);
   const [selected, setSelected] = useState(
-    userType === "student" ? { id: "Profile" } : { id: "Admin" }
+    getIcon || (userType === "student" ? { id: "Profile" } : { id: "Admin" })
   );
   useEffect(() => {
+    //Display content according to the selected icon.
+    displayScreen(selected.id);
+    //Set selected icon to local storage every time the state changes.
     console.log("Selected: ", selected);
     sessionStorage.setItem("sidePanelTab", JSON.stringify(selected));
   }, [selected]);
@@ -32,7 +37,7 @@ const SidePanelIcons = ({ displayScreen, expanded, userType }) => {
       click: (e) => setSelectedIcon(e.currentTarget.id),
     },
     {
-      name: "User Details",
+      name: "Student Info",
       iconName: BiEdit,
       click: (e) => setSelectedIcon(e.currentTarget.id),
     },
@@ -41,11 +46,10 @@ const SidePanelIcons = ({ displayScreen, expanded, userType }) => {
   function setSelectedIcon(iconId) {
     console.log(iconId);
     setSelected({ id: iconId });
-    displayScreen(iconId);
   }
 
   return (
-    <section className="side-panel-icons-container flex flex-col items-center gap-1.5">
+    <section className="side-panel-icons-container w-[210px] flex flex-col items-center gap-1.5">
       {userType === "student" &&
         studentOptions.map((option) => (
           <section
@@ -53,26 +57,23 @@ const SidePanelIcons = ({ displayScreen, expanded, userType }) => {
             id={option.name}
             title={option.name}
             key={option.name}
-            className={`option w-full h-14 flex items-center justify-between cursor-pointer hover:bg-[#ff5b5b]
+            className={`option w-[210px] h-14 flex items-center justify-between cursor-pointer hover:bg-[#ff5b5b]
                   ${selected.id === option.name && "bg-[#ff5b5b]"} group`}
           >
             <option.iconName
               id={option.name}
-              className={`${!expanded && "w-full h-full text-4xl sm:p-2"} ${
-                expanded && "w-[40px] h-[40px] ml-1"
-              } text-gray-800 font-light transition-all duration-200 group-hover:text-white ${
+              className={`w-[60px] text-4xl
+                text-gray-800 font-light transition-all duration-100 group-hover:text-white ${
                 selected.id === option.name && "text-white"
               }`}
             />
-            {expanded && (
               <span
-                className={`icon-name mr-2 text-lg font-medium transition-all duration-200 group-hover:text-white ${
+                className={`icon-name w-[150px] text-lg font-medium text-nowrap transition-all duration-100 group-hover:text-white ${
                   selected.id === option.name && "text-white"
                 }`}
               >
                 {option.name}
               </span>
-            )}
           </section>
         ))}
       {userType === "admin" &&
@@ -87,21 +88,18 @@ const SidePanelIcons = ({ displayScreen, expanded, userType }) => {
           >
             <option.iconName
               id={option.name}
-              className={`${!expanded && "w-full h-full text-4xl sm:p-2"} ${
-                expanded && "w-[40px] h-[40px] ml-1"
-              } text-gray-800 font-light transition-all duration-200 group-hover:text-white ${
+              className={`w-[60px] text-4xl
+                text-gray-800 font-light transition-all duration-100 group-hover:text-white ${
                 selected.id === option.name && "text-white"
               }`}
             />
-            {expanded && (
               <span
-                className={`icon-name mr-2 text-lg font-medium transition-all duration-200 group-hover:text-white ${
+                className={`icon-name w-[190px] text-lg font-medium text-nowrap transition-all duration-100 group-hover:text-white ${
                   selected.id === option.name && "text-white"
                 }`}
               >
                 {option.name}
               </span>
-            )}
           </section>
         ))}
     </section>

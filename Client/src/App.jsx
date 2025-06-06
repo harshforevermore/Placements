@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       {user && <Navbar />}
-      <main className={`main-container ${user && 'mt-16 ml-12'}`}>
+      <main className={`main-container ${user && 'mt-16 ml-15'}`}>
         <RouterNav />
       </main>
       <Footer />

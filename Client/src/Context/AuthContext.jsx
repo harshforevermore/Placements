@@ -1,5 +1,4 @@
 import { useState, useEffect, createContext } from "react";
-import { fakeUser } from "../Data/data";
 
 export const AuthContext = createContext();
 
@@ -7,12 +6,10 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(undefined);
   const [userType, setUserType] = useState("");
 
-  sessionStorage.setItem("user", JSON.stringify(fakeUser));
-
   useEffect(() => {
     // getting the user from the local storage(if exists!) on page reload.
     const storedUser = JSON.parse(sessionStorage.getItem("user"));
-    console.log(storedUser);
+    console.info("Stored user: ", storedUser);
     try {
       if (storedUser) {
         setUser(storedUser);
@@ -33,10 +30,11 @@ export const AuthProvider = ({ children }) => {
   }
 
   function logout() {
-    // removing the user data stored in the local storage
+    // removing the user data stored in the session storage
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("sidePanelTab");
     setUser(undefined);
     setUserType("");
-    sessionStorage.removeItem("user");
   }
   return (
     <AuthContext.Provider value={{ user, userType, login, logout }}>

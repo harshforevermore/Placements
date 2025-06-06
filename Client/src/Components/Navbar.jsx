@@ -2,14 +2,17 @@ import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../images/JU_logo.png";
 import { AuthContext } from "../Context/AuthContext";
+import {useNotification} from "../Context/NotificationContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { user, logout } = useContext(AuthContext);
+  const {showNotification} = useNotification();
 
   function handleLogout() {
     logout();
     navigate("/login");
+    showNotification("Logged out successfully", "success");
   }
 
   return (
