@@ -4,6 +4,7 @@ import PersonalDetails from "../Components/Placement Forms/PersonalDetails";
 import Button from "../Components/Form Components/Button";
 import EducationDetails from "../Components/Placement Forms/EducationDetails";
 import ProgressBar from "../Components/Form Components/ProgressBar";
+import UploadDocuments from "../Components/Placement Forms/UploadDocuments";
 
 const PlacementRegistration = () => {
   const methods = useForm({ mode: "onBlur" });
@@ -11,7 +12,10 @@ const PlacementRegistration = () => {
   const steps = [
     { label: "Personal Details", component: <PersonalDetails /> },
     { label: "Education Details", component: <EducationDetails /> },
+    { label: "Upload Documents", component: <UploadDocuments />},
   ];
+  console.log(steps);
+  console.info("length: ", steps.length);
   const [step, setStep] = useState(0); //state to track the current form
 
   const handleNext = async () => {
@@ -23,7 +27,7 @@ const PlacementRegistration = () => {
   };
   return (
     <div className="placement-registeration-container">
-      <h1 className="text-4xl text-[#ff0000] mb-4 text-center font-medium">
+      <h1 className="text-4xl text-red-500 mb-4 text-center font-medium">
         Registeration
       </h1>
       <div className="progress-bar-part w-full my-4 sm:my-6">

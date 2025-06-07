@@ -10,10 +10,10 @@ const LoaderProvider = ({children}) => {
     const [loading, setLoading] = useState(false);
 
     const showLoader = () => {
-        setLoading(true);
+      setLoading(true);
     }
     const hideLoader = () => {
-        setLoading(false);
+      setLoading(false);
     }
 
   return (

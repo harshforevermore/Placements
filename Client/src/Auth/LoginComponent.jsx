@@ -34,7 +34,7 @@ const LoginComponent = ({ fancy }) => {
     }, 3000);
   }
 
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     showLoader();
     if(data.username == "oresama" && data.password == "oresama") {
       login(fakeUser);

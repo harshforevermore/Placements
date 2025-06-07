@@ -17,7 +17,7 @@ const RouterNav = () => {
         <Route path="/" element={user ? <Navigate to="/home" /> : <Navigate to="/login" />} />
 
         <Route path="/" element={<Navigate to="/home" />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={user ? <Navigate to="/home" replace/> : <LoginPage />} />
         <Route path="/register" element={<Register />} />
         {/* <Route path="/loader" element={<Loader />} /> */}
 

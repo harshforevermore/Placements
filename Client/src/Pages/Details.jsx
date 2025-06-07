@@ -5,9 +5,8 @@ const Details = () => {
   const placementRegistered = JSON.parse(
     sessionStorage.getItem("user")
   ).placementRegistered;
-  console.log(placementRegistered);
   return (
-    <div className="details-container">
+    <div className="details-container h-full py-2 bg-white shadow-[0_0_5px_gray] rounded-lg">
       {placementRegistered ? (
         <p>already registered</p>
       ) : (

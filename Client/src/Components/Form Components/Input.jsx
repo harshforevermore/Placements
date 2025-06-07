@@ -4,7 +4,7 @@ import { useFormContext } from "react-hook-form";
 const Input = ({
   name,
   label,
-  labelFixed = false,
+  // labelFixed = true,
   required=true,
   type = "text",
   // placeholder = "",
@@ -21,26 +21,28 @@ const Input = ({
 }) => {
   const {
     register,
-    watch,
+    // watch,
     formState: { errors },
   } = useFormContext();
 
-  const inputData = watch(name);
+  // const inputData = watch(name);
 
   // const [isFocused, setIsFocused] = useState(false);
-  const [labelUp, setLabelUp] = useState(false);
+  // const [labelUp, setLabelUp] = useState(false);
   
   return (
     <div className={`${name}-container flex flex-col ${containerClasses}`}>
       <div className="input-container relative flex items-center gap-2"
-      onFocus={() => setLabelUp(true)}
-      onBlur={() => {inputData ? setLabelUp(true) : setLabelUp(false)}}>
+      // onFocus={() => setLabelUp(true)}
+      // onBlur={() => {inputData ? setLabelUp(true) : setLabelUp(false)}}
+      >
         {label && (
           <label
             htmlFor={`${name}-field`}
-            className={`input-label absolute left-[.55em] bg-white ${labelFixed || labelUp ? '-top-1' : 'top-[1.25em]'} px-[.1em] cursor-text text-md text-gray-700 font-medium text-nowrap shadow-[0_0_3px_2px_#fff] transition-all duration-150 ease-in-out`}
+            className={`input-label absolute left-[.55em] bg-white -top-1 px-[.1em] cursor-text text-md text-gray-700 font-medium text-nowrap shadow-[0_0_3px_2px_#fff] transition-all duration-150 ease-in-out`}
           >
             {label}
+            {required && <span className="absolute -top-1.5 -right-1 text-sm text-red-500">*</span>}
           </label>
         )}
         <input
