@@ -4,6 +4,7 @@ import { BiEdit } from "react-icons/bi";
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { LuSettings } from "react-icons/lu";
 import { AuthContext } from "../Context/AuthContext";
+import { FiUpload } from "react-icons/fi";
 
 const SidePanelIcons = ({ displayScreen }) => {
   const getIcon = JSON.parse(sessionStorage.getItem("sidePanelTab"));
@@ -39,6 +40,11 @@ const SidePanelIcons = ({ displayScreen }) => {
     {
       name: "Student Info",
       iconName: BiEdit,
+      click: (e) => setSelectedIcon(e.currentTarget.id),
+    },
+    {
+      name: "Document Upload",
+      iconName: FiUpload,
       click: (e) => setSelectedIcon(e.currentTarget.id),
     },
   ];
