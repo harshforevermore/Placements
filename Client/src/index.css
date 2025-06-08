@@ -11,20 +11,20 @@ body {
 }
 
 
-#notification {
-  animation: notification 3s 50ms normal ease-in-out alternate;
+div#notification {
+  animation: notify 500ms normal ease-out;
 }
-@keyframes notification {
+@keyframes notify {
   0% {
-    transform: translateX(100%);
+    transform: translateY(-100%);
     opacity: 0;
   }
-  15% {
-    transform: translateX(0);
-    opacity: .9;
+  40% {
+    transform: translateY(0);
+    opacity: 1;
   }
   100% {
-    transform: translateX(0);
+    transform: translateY(0);
     opacity: 1;
   }
 }

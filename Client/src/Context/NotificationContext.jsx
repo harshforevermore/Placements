@@ -7,7 +7,7 @@ export const useNotification = () => useContext(NotificationContext);
 
 const NotificationProvider = ({children}) => {
     const [notification, setNotification] = useState({message: "", status: "", visible: false});
-    const showNotification = (message, status, timeout=2000) => {
+    const showNotification = (message, status, timeout=3000) => {
         setNotification({message, status, visible: true});
         setTimeout(() => {
             setNotification({message: "", status: "", visible: false});

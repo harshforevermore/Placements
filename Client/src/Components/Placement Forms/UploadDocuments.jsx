@@ -18,10 +18,6 @@ const UploadDocuments = () => {
             name="marksheet12"
             label="12th Marksheet"
         />
-        <FileInput
-            name="nudes"
-            label="Your Nudes (Girl's Only)"
-        />
       </section>
     </div>
   );

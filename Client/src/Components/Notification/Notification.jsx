@@ -4,8 +4,8 @@ import { MdError } from "react-icons/md";
 
 const Notification = ({notificationText, status="success"}) => {
   return (
-    <div id='notification' className={`notification-container z-[199] fixed top-20 right-0 min-w-[15em] py-3 px-5 flex justify-center rounded-lg ${status === "success" ? 'bg-green-200' : 'bg-red-200'}`}>
-        <span className={`notification-text font-bold text-xl text-nowrap ${status === "success" ? 'text-green-700' : 'text-red-700'}`}>{notificationText}</span>
+    <div id='notification' className={`notification-container z-[199] fixed top-1 left-1/2 -translate-x-1/2 min-w-[15em] py-3 px-5 flex justify-center rounded-lg ${status === "success" ? 'bg-green-200' : 'bg-red-200'}`}>
+        <span className={`notification-text inline-block font-bold text-xl text-nowrap ${status === "success" ? 'text-green-700' : 'text-red-700'}`}>{notificationText}</span>
         <section className="notification-icon inline-block place-self-center mx-2">
             {
                 status === "success" ?

@@ -49,7 +49,7 @@ const SidePanelIcons = ({ displayScreen }) => {
   }
 
   return (
-    <section className="side-panel-icons-container w-[210px] flex flex-col items-center gap-1.5">
+    <section className="side-panel-icons-container w-[190px] md:w-[210px] flex flex-col items-center gap-1.5">
       {userType === "student" &&
         studentOptions.map((option) => (
           <section
@@ -57,18 +57,18 @@ const SidePanelIcons = ({ displayScreen }) => {
             id={option.name}
             title={option.name}
             key={option.name}
-            className={`option w-[210px] h-14 flex items-center justify-between cursor-pointer hover:bg-[#ff5b5b]
+            className={`option w-[190px] md:w-[210px] h-14 flex items-center justify-between cursor-pointer hover:bg-[#ff5b5b]
                   ${selected.id === option.name && "bg-[#ff5b5b]"} group`}
           >
             <option.iconName
               id={option.name}
-              className={`w-[60px] text-4xl
+              className={`w-[50px] md:w-[60px] text-3xl md:text-4xl
                 text-gray-800 font-light transition-all duration-100 group-hover:text-white ${
                 selected.id === option.name && "text-white"
               }`}
             />
               <span
-                className={`icon-name w-[150px] text-lg font-medium text-nowrap transition-all duration-100 group-hover:text-white ${
+                className={`icon-name w-[140px] md:w-[150px] text-lg font-medium text-nowrap transition-all duration-100 group-hover:text-white ${
                   selected.id === option.name && "text-white"
                 }`}
               >
@@ -83,18 +83,18 @@ const SidePanelIcons = ({ displayScreen }) => {
             id={option.name}
             title={option.name}
             key={option.name}
-            className={`option w-full h-14 flex items-center justify-between cursor-pointer hover:bg-[#ff5b5b]
+            className={`option w-[190px] md:w-[210px] h-14 flex items-center justify-between cursor-pointer hover:bg-[#ff5b5b]
                   ${selected.id === option.name && "bg-[#ff5b5b]"} group`}
           >
             <option.iconName
               id={option.name}
-              className={`w-[60px] text-4xl
+              className={`w-[50px] md:w-[60px] text-3xl md:text-4xl
                 text-gray-800 font-light transition-all duration-100 group-hover:text-white ${
                 selected.id === option.name && "text-white"
               }`}
             />
               <span
-                className={`icon-name w-[190px] text-lg font-medium text-nowrap transition-all duration-100 group-hover:text-white ${
+                className={`icon-name w-[140px] md:w-[150px] text-lg font-medium text-nowrap transition-all duration-100 group-hover:text-white ${
                   selected.id === option.name && "text-white"
                 }`}
               >

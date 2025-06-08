@@ -30,7 +30,7 @@ const SidePanel = (props) => {
         )}
       </div>
       <div
-        className={`icons-container h-full ${expanded ? "w-[210px]" : "w-[60px] overflow-hidden"}
+        className={`icons-container h-full ${expanded ? "w-[190px] md:w-[210px]" : "w-[50px] md:w-[60px] overflow-hidden"}
           pt-1 mt-0 ${hover && 'mt-2'} transition-all duration-100 ease-out`} //${!expanded && "w-10 md:w-12 xl:w-14"} ${expanded && "w-40"}
       >
         <SidePanelIcons displayScreen={props.displayScreen} />
