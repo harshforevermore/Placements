@@ -30,6 +30,11 @@ const SidePanelIcons = ({ displayScreen }) => {
       iconName: LuSettings,
       click: (e) => setSelectedIcon(e.currentTarget.id),
     },
+    {
+      name: "Document",
+      iconName: HiOutlineDocumentText,
+      click: (e) => setSelectedIcon(e.currentTarget.id),
+    },
   ];
   const studentOptions = [
     {

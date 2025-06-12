@@ -138,7 +138,7 @@ const PersonalDetails = () => {
           placeholder="Current Location (City/Town)"
           minLength={2}
           maxLength={50}
-          pattern={/^[A-Za-z\s\-]+$/}
+          pattern={/^[A-Za-z\s-]+$/}
           patternMessage="Only alphabets allowed"
           containerClasses="flex-1"
         />

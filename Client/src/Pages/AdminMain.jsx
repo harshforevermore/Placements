@@ -6,9 +6,9 @@ import { IoSearch } from "react-icons/io5";
 
 const AdminMain = () => {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
-  function setFilter() {
+  // function setFilter() {
     
-  }
+  // }
   return (
     <div className="admin-page-container w-full min-h-full rounded-lg bg-white shadow-[0_0_5px_gray]">
       <div className="headin-container px-3 rounded-t-lg bg-[#ff5b5b]">

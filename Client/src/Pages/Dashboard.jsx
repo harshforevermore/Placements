@@ -2,10 +2,11 @@ import React, { useContext, useState } from "react";
 import SidePanel from "../Components/SidePanel";
 import Profile from "./Profile";
 import Details from "./Details";
-import DocumentUpload from "./DocumentUpload";
+import StudentAssignmentList from "./studentAssignmentList";
 import { AuthContext } from "../Context/AuthContext";
 import AdminMain from "./AdminMain";
 import AdminControls from "../Components/Admin Components/AdminControls";
+import AdminDashboard from "./AdminDashboard";
 
 const Dashboard = () => {
   const { userType } = useContext(AuthContext);
@@ -19,12 +20,13 @@ const Dashboard = () => {
           <>
             {displayScreen === "Profile" && <Profile />}
             {displayScreen === "Student Info" && <Details />}
-            {displayScreen === "Document Upload" && <DocumentUpload/>}
+            {displayScreen === "Document Upload" && <StudentAssignmentList/>}
           </>
         ) : (
           <>
             {displayScreen === "Admin" && <AdminMain />}
             {displayScreen === "Controls" && <AdminControls />}
+             {displayScreen === "Document" && <AdminDashboard/>}
           </>
         )}
       </div>
