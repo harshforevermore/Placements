@@ -3,36 +3,45 @@ package com.Project.CollegeProject.Controllers;
 import com.Project.CollegeProject.Models.StudentPersonalDetails;
 import com.Project.CollegeProject.Services.StudentDetailService;
 import com.Project.CollegeProject.Services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.Map;
 
 @RestController
 public class StudentDetailsController {
-    @Autowired
-    private UserService userService;
+    private final StudentDetailService studentPersonalDetailService;
+    private final UserService userService;
+    public StudentDetailsController(StudentDetailService studentPersonalDetailService, UserService userService) {
+        this.studentPersonalDetailService = studentPersonalDetailService;
+        this.userService = userService;
+    }
 
-    @Autowired
-    private StudentDetailService studentPersonalDetailService;
-
-    @PutMapping("/saveStudentDetails")
-    public ResponseEntity<?> saveStudentDetails(@RequestBody StudentPersonalDetails studentPersonalDetails){
+    @PostMapping(value = "/saveStudentWithDocument", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> saveStudentWithDocument(
+            @RequestPart("student") String studentJson,
+            @RequestPart("files") MultipartFile[] files) {
         try {
-            ResponseEntity<?> userExistence = userService.userExistence( null,studentPersonalDetails.getCollegeEmail());
+            ObjectMapper mapper = new ObjectMapper();
+            StudentPersonalDetails studentDetails = mapper.readValue(studentJson, StudentPersonalDetails.class);
+
+            ResponseEntity<?> userExistence = userService.userExistence(null,studentDetails.getCollegeEmail());
             if (userExistence.getStatusCode() == HttpStatus.NOT_FOUND) {
-                return new ResponseEntity<>("Invalid User", HttpStatus.NOT_FOUND);
-            } else {
-                StudentPersonalDetails personalDetails = studentPersonalDetailService.saveStudentDetails(studentPersonalDetails);
-                if (personalDetails != null){
-                    return new ResponseEntity<>(personalDetails,HttpStatus.OK);
-                } else {
-                    return new ResponseEntity<>("SOMETHING WENT WRONG! WHILE SAVING DATA",HttpStatus.INTERNAL_SERVER_ERROR);
-                }
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(Map.of("error", "Invalid User"));
             }
-        } catch (Exception e){
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+            StudentPersonalDetails saved = studentPersonalDetailService.saveStudentWithDocuments(studentDetails, files);
+            return ResponseEntity.ok(saved);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("error", e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "Failed to save student details: " + e.getMessage()));
         }
     }
 
@@ -42,10 +51,8 @@ public class StudentDetailsController {
             StudentPersonalDetails details = studentPersonalDetailService.getStudentDetails(email);
             return ResponseEntity.ok(details);
         } catch (IllegalArgumentException e) {
-            // Student not found
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", e.getMessage()));
         } catch (Exception e) {
-            // Other errors
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", e.getMessage()));
         }
     }

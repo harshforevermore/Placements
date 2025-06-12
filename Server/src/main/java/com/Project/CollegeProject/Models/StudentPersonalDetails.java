@@ -8,6 +8,8 @@ import jakarta.validation.constraints.Past;
 import lombok.Data;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -40,4 +42,8 @@ public class StudentPersonalDetails {
     @OneToOne(mappedBy = "studentPersonalDetails", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JsonManagedReference
     private StudentEducationalDetails educationalDetails;
+
+    @OneToMany(mappedBy = "studentPersonalDetails", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<StudentDocument> studentDocument = new ArrayList<>();
 }
