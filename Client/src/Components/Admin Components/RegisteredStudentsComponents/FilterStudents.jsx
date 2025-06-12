@@ -6,7 +6,7 @@ const FilterStudents = ({ visible, setVisible }) => {
   const [selectedSection, setSelectedSection] = useState(null);
 
   function handleSetFilter() {
-    
+    console.log({course: selectedCourse, section: selectedSection});
   }
   return (
     <section
@@ -25,14 +25,14 @@ const FilterStudents = ({ visible, setVisible }) => {
       </section>
       <section className="filter-course flex justify-between my-2">
         <label
-          htmlFor="select-course"
+          htmlFor="selectCourse"
           className="select-course-label text-lg text-slate-600 font-medium"
         >
           Select Course:{" "}
         </label>
         <select
-          name="select-course"
-          id="select-course"
+          name="selectCourse"
+          id="selectCourse"
           defaultValue={"Course"}
           onChange={(e) => setSelectedCourse(e.target.value !== "Course" ? e.target.value : null)}
           className="cursor-pointer w-40 rounded-sm outline-none block text-md text-slate-700 border-1 border-black focus:ring-0 focus:border-black peer"
@@ -50,16 +50,16 @@ const FilterStudents = ({ visible, setVisible }) => {
       </section>
       <section className="filter-section flex justify-between">
         <label
-          htmlFor="select-section"
+          htmlFor="selectSection"
           className="select-course-label text-lg text-slate-600 font-medium"
         >
           Select Section:{" "}
         </label>
         <select
-          name="select-section"
-          id="select-section"
+          name="selectSection"
+          id="selectSection"
           defaultValue={"Section"}
-          disabled={selectedCourse !== null}
+          disabled={selectedCourse === null}
           onChange={(e) => setSelectedSection(e.target.value !== "Section" ? e.target.value : null)}
           className="cursor-pointer w-40 rounded-sm outline-none block text-md text-slate-700 border-1 border-black focus:ring-0 focus:border-black peer"
         >

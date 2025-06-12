@@ -12,7 +12,7 @@ function App() {
       <main className={`main-container ${user && 'mt-16 ml-12 md:ml-15'}`}>
         <RouterNav />
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

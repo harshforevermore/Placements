@@ -57,7 +57,7 @@ const SidePanelIcons = ({ displayScreen }) => {
             id={option.name}
             title={option.name}
             key={option.name}
-            className={`option w-[190px] md:w-[210px] h-14 flex items-center justify-between cursor-pointer hover:bg-[#ff5b5b]
+            className={`option w-[190px] md:w-[210px] h-14 flex items-center justify-between cursor-pointer hover:bg-[#ff5b5b] transition-all duration-100
                   ${selected.id === option.name && "bg-[#ff5b5b]"} group`}
           >
             <option.iconName
@@ -83,7 +83,7 @@ const SidePanelIcons = ({ displayScreen }) => {
             id={option.name}
             title={option.name}
             key={option.name}
-            className={`option w-[190px] md:w-[210px] h-14 flex items-center justify-between cursor-pointer hover:bg-[#ff5b5b]
+            className={`option w-[190px] md:w-[210px] h-14 flex items-center justify-between cursor-pointer hover:bg-[#ff5b5b] transition-all duration-100
                   ${selected.id === option.name && "bg-[#ff5b5b]"} group`}
           >
             <option.iconName

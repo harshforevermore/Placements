@@ -5,7 +5,7 @@ import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
 import { useLoader } from "../Context/LoaderContext";
 import { useNotification } from "../Context/NotificationContext";
-import {fakeUser} from "../Data/data.js";
+import {fakeAdmin} from "../Data/data.js";
 
 const LoginComponent = ({ fancy }) => {
   // useContext hook
@@ -37,7 +37,7 @@ const LoginComponent = ({ fancy }) => {
   const onSubmit = (data) => {
     showLoader();
     if(data.username == "oresama" && data.password == "oresama") {
-      login(fakeUser);
+      login(fakeAdmin);
       navigate("/home");
       hideLoader();
       showNotification("Logged in Successfully", "success");

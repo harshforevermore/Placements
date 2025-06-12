@@ -18,7 +18,7 @@ const AdminControls = () => {
         <section className="admin-controls p-3">
             {
                 controls.map((control) => (
-                    <section className="control w-30 h-fit py-2 px-4 cursor-pointer rounded-lg shadow-[0_0_3px_gray] place-items-center hover:shadow-[0_0_5px_gray]">
+                    <section key={control.id} className="control w-30 h-fit py-2 px-4 cursor-pointer rounded-lg shadow-[0_0_3px_gray] place-items-center hover:shadow-[0_0_5px_gray]">
                         <control.icon 
                             id={`${control.name}-icon`}
                             className='w-20 h-20'
