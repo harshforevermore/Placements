@@ -4,7 +4,7 @@ export const fakeUser = {
   course: "MCA",
   email: "smth.2@gmail.com",
   role: "student",
-  placementRegistered: false,
+  placementRegistered: true,
 };
 export const fakeStudents = [
   {

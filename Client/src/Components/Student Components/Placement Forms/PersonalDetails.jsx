@@ -1,7 +1,7 @@
 import React from "react";
 // import { useForm } from "react-hook-form";
-import Input from "../Form Components/Input";
-import RadioButton from "../Form Components/RadioButton";
+import Input from "../../Form Components/Input";
+import RadioButton from "../../Form Components/RadioButton";
 
 const PersonalDetails = () => {
   return (

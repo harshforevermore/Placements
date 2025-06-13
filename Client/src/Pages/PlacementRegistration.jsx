@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import PersonalDetails from "../Components/Placement Forms/PersonalDetails";
+import PersonalDetails from "../Components/Student Components/Placement Forms/PersonalDetails";
 import Button from "../Components/Form Components/Button";
-import EducationDetails from "../Components/Placement Forms/EducationDetails";
+import EducationDetails from "../Components/Student Components/Placement Forms/EducationDetails";
 import ProgressBar from "../Components/Form Components/ProgressBar";
-import UploadDocuments from "../Components/Placement Forms/UploadDocuments";
+import UploadDocuments from "../Components/Student Components/Placement Forms/UploadDocuments";
 
 const PlacementRegistration = () => {
   const methods = useForm({ mode: "onBlur" });

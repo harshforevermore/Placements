@@ -1,5 +1,5 @@
 import React from "react";
-import FileInput from "../Form Components/FileInput";
+import FileInput from "../../Form Components/FileInput";
 
 const UploadDocuments = () => {
   return (

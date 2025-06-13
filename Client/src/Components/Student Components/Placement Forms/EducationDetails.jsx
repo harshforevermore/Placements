@@ -1,5 +1,5 @@
 import React from "react";
-import Input from "../Form Components/Input";
+import Input from "../../Form Components/Input";
 
 const EducationDetails = () => {
   const course = JSON.parse(sessionStorage.getItem("user")).course;
