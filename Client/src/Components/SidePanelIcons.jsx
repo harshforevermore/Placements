@@ -1,52 +1,52 @@
-import React, { useState, useContext, useEffect } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
 import { BiEdit } from "react-icons/bi";
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { LuSettings } from "react-icons/lu";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
+import { useContext } from "react";
 
-const SidePanelIcons = ({ displayScreen }) => {
-  const getIcon = JSON.parse(sessionStorage.getItem("sidePanelTab"));
-  const { userType } = useContext(AuthContext);
-  const [selected, setSelected] = useState(
-    getIcon || (userType === "student" ? { id: "Profile" } : { id: "Admin" })
-  );
-  useEffect(() => {
-    //Display content according to the selected icon.
-    displayScreen(selected.id);
-    //Set selected icon to local storage every time the state changes.
-    console.log("Selected: ", selected);
-    sessionStorage.setItem("sidePanelTab", JSON.stringify(selected));
-  }, [selected]);
+const SidePanelIcons = ({}) => {
+  const {userType} = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const currentPath = location.pathname;
   const adminOptions = [
     {
       name: "Admin",
       iconName: HiOutlineDocumentText,
-      click: (e) => setSelectedIcon(e.currentTarget.id),
+      iconPath: "/dashboard/admin",
+      click: () => {
+        navigate("/dashboard");
+      },
     },
     {
       name: "Controls",
       iconName: LuSettings,
-      click: (e) => setSelectedIcon(e.currentTarget.id),
+      iconPath: "/dashboard/adminControls",
+      click: () => {
+        navigate("/dashboard/adminControls");
+      },
     },
   ];
   const studentOptions = [
     {
       name: "Profile",
       iconName: FaRegUserCircle,
-      click: (e) => setSelectedIcon(e.currentTarget.id),
+      iconPath: "/dashboard/profile",
+      click: () => {
+        navigate("/dashboard");
+      },
     },
     {
       name: "Student Info",
       iconName: BiEdit,
-      click: (e) => setSelectedIcon(e.currentTarget.id),
+      iconPath: "/dashboard/studentInfo",
+      click: () => {
+        navigate("/dashboard/studentInfo");
+      },
     },
   ];
-
-  function setSelectedIcon(iconId) {
-    console.log(iconId);
-    setSelected({ id: iconId });
-  }
 
   return (
     <section className="side-panel-icons-container w-[190px] md:w-[210px] flex flex-col items-center gap-1.5">
@@ -58,22 +58,22 @@ const SidePanelIcons = ({ displayScreen }) => {
             title={option.name}
             key={option.name}
             className={`option w-[190px] md:w-[210px] h-14 flex items-center justify-between cursor-pointer hover:bg-[#ff5b5b] transition-all duration-100
-                  ${selected.id === option.name && "bg-[#ff5b5b]"} group`}
+                  ${currentPath === option.iconPath && "bg-[#ff5b5b]"} group`}
           >
             <option.iconName
               id={option.name}
               className={`w-[50px] md:w-[60px] text-3xl md:text-4xl
                 text-gray-800 font-light transition-all duration-100 group-hover:text-white ${
-                selected.id === option.name && "text-white"
-              }`}
-            />
-              <span
-                className={`icon-name w-[140px] md:w-[150px] text-lg font-medium text-nowrap transition-all duration-100 group-hover:text-white ${
-                  selected.id === option.name && "text-white"
+                  currentPath === option.iconPath && "text-white"
                 }`}
-              >
-                {option.name}
-              </span>
+            />
+            <span
+              className={`icon-name w-[140px] md:w-[150px] text-lg font-medium text-nowrap transition-all duration-100 group-hover:text-white ${
+                currentPath === option.iconPath && "text-white"
+              }`}
+            >
+              {option.name}
+            </span>
           </section>
         ))}
       {userType === "admin" &&
@@ -84,22 +84,22 @@ const SidePanelIcons = ({ displayScreen }) => {
             title={option.name}
             key={option.name}
             className={`option w-[190px] md:w-[210px] h-14 flex items-center justify-between cursor-pointer hover:bg-[#ff5b5b] transition-all duration-100
-                  ${selected.id === option.name && "bg-[#ff5b5b]"} group`}
+                  ${currentPath === option.iconPath && "bg-[#ff5b5b]"} group`}
           >
             <option.iconName
               id={option.name}
               className={`w-[50px] md:w-[60px] text-3xl md:text-4xl
                 text-gray-800 font-light transition-all duration-100 group-hover:text-white ${
-                selected.id === option.name && "text-white"
-              }`}
-            />
-              <span
-                className={`icon-name w-[140px] md:w-[150px] text-lg font-medium text-nowrap transition-all duration-100 group-hover:text-white ${
-                  selected.id === option.name && "text-white"
+                  currentPath === option.iconPath && "text-white"
                 }`}
-              >
-                {option.name}
-              </span>
+            />
+            <span
+              className={`icon-name w-[140px] md:w-[150px] text-lg font-medium text-nowrap transition-all duration-100 group-hover:text-white ${
+                currentPath === option.iconPath && "text-white"
+              }`}
+            >
+              {option.name}
+            </span>
           </section>
         ))}
     </section>

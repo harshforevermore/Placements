@@ -31,8 +31,7 @@ export const AuthProvider = ({ children }) => {
 
   function logout() {
     // removing the user data stored in the session storage
-    sessionStorage.removeItem("user");
-    sessionStorage.removeItem("sidePanelTab");
+    sessionStorage.clear();
     setUser(undefined);
     setUserType("");
   }

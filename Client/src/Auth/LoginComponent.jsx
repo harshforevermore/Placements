@@ -1,11 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
-import axios from "axios";
+// import axios from "axios";
 import { useLoader } from "../Context/LoaderContext";
 import { useNotification } from "../Context/NotificationContext";
-import {fakeUser} from "../Data/data.js";
+import {fakeAdmin} from "../Data/data.js";
 
 const LoginComponent = ({ fancy }) => {
   // useContext hook
@@ -24,21 +24,11 @@ const LoginComponent = ({ fancy }) => {
     formState: { errors },
   } = useForm({mode: "onChange"});
 
-  //UseState hooks
-  const [userNotFound, setUserNotFound] = useState(false);
-
-  function showUserNotFound() {
-    setUserNotFound(true);
-    setTimeout(() => {
-      setUserNotFound(false);
-    }, 3000);
-  }
-
   const onSubmit = (data) => {
     showLoader();
     if(data.username == "oresama" && data.password == "oresama") {
-      login(fakeUser);
-      navigate("/home");
+      login(fakeAdmin);
+      navigate("/dashboard");
       hideLoader();
       showNotification("Logged in Successfully", "success");
     }
@@ -88,11 +78,6 @@ const LoginComponent = ({ fancy }) => {
   return (
     <>
       <h1 className="text-4xl font-bold text-[#ff0000] mb-4">Login</h1>
-      {userNotFound && (
-        <span className="userNotFound w-fit py-0.5 px-2 rounded-md bg-[#ff0000] text-xl text-white font-bold animate-reveal">
-          user not found
-        </span>
-      )}
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <div className="username-container flex flex-col">
           <input

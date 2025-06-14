@@ -1,7 +1,7 @@
 import axios from "axios";
-import React, {useState} from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useNotification } from "../Context/NotificationContext";
 
 const RegisterComponent = () => {
   //useForm hook
@@ -11,19 +11,9 @@ const RegisterComponent = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const {showNotification} = useNotification();
   const requiredMessage = "This field is required";
   const confirmPassword = watch("password");
-
-  const [serverErr, setServerErr] = useState("");
-
-  function showError(err) {
-    if(err) {
-      setServerErr(err);
-      setTimeout(() => {
-        setServerErr("");
-      }, 3000);
-    }
-  }
 
   const navigate = useNavigate();
   const onSubmit = async (data) => {
@@ -47,7 +37,7 @@ const RegisterComponent = () => {
       console.error("Error:", error.message);
       if(axios.isAxiosError(error)) {
         if(error.response.status == 409) {
-          showError(error.response.data);
+          showNotification(error.response.data, "error");
         }
         else if (error.response) {
           console.log("Error Status:", error.response.status);
@@ -65,11 +55,6 @@ const RegisterComponent = () => {
         <h1 className="text-[2.11em] font-bold text-[#ff0000] mb-4">
           Create Account
         </h1>
-        {serverErr && (
-        <span className="server-error w-fit py-0.5 px-2 rounded-md bg-[#ff0000] text-xl text-white font-bold animate-reveal">
-          {serverErr}
-        </span>
-      )}
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-full form flex flex-col gap-4"

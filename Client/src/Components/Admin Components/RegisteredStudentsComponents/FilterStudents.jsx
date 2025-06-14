@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
 
-const FilterStudents = ({ visible, setVisible }) => {
+const FilterStudents = ({ visible, setVisible, handleFilter }) => {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
 
   function handleSetFilter() {
-    console.log({course: selectedCourse, section: selectedSection});
+    setVisible(false);
+    handleFilter({course: selectedCourse, section: selectedSection});
+    // console.log({course: selectedCourse, section: selectedSection});
   }
   return (
     <section
@@ -89,7 +91,7 @@ const FilterStudents = ({ visible, setVisible }) => {
           onClick={handleSetFilter}
           className="bg-[#ff0000] text-white font-medium text-lg px-2 rounded-md cursor-pointer hover:shadow-[1px_1px_3px_gray] focus:shadow-[1px_1px_3px_gray] active:bg-[#ff0000] active:shadow-none transition-all duration-150 ease-in"
         >
-          Set
+          Filter
         </button>
       </section>
     </section>
