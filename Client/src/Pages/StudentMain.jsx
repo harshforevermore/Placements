@@ -1,19 +1,30 @@
-import React, {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Details from './Details';
 import UploadDocumentsStudent from '../Components/Student Components/UploadDocumentsStudent';
+import { useSearchParams } from 'react-router-dom';
 
 const StudentMain = () => {
   const tabs = [
     {
       id: 1,
       name: "Student Details",
+      urlName: "details"
     },
     {
       id: 2,
       name: "Upload Documents",
+      urlName: "documents"
     },
   ];
   const [selectedTab, setSelectedTab] = useState(tabs[0].name);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentTab = searchParams.get("tab") || "details";
+
+  useEffect(() => {
+    if (!currentTab) {
+      setSearchParams({ tab: "personal" });
+    }
+  }, [currentTab, setSearchParams]);
 
   return (
     <div className="admin-page-container w-full min-h-full rounded-lg bg-white shadow-[0_0_5px_gray]">
@@ -28,7 +39,7 @@ const StudentMain = () => {
                     ? "bg-white border-transparent"
                     : "bg-[#ffe8e8] rounded-b-md border-[#ff5b5b]"
                 } hover:bg-white transition-all duration-100 ease-in-out group`}
-                onClick={() => setSelectedTab(tab.name)}
+                onClick={() => {setSearchParams({tab: tab.urlName}); setSelectedTab(tab.name)}}
               >
                 <span className={`tab-name font-medium text-[#ec2222]`}>
                   {tab.name}
@@ -38,11 +49,11 @@ const StudentMain = () => {
           })}
       </div>
       <div className="wrapper">
-        <h2 className="my-2 text-3xl font-medium text-center text-nowrap">
+        <h2 className="text-4xl text-red-500 mb-4 mt-2 text-center font-medium text-nowrap">
           {selectedTab}
         </h2>
-        {selectedTab === tabs[0].name && <Details />}
-        {selectedTab === tabs[1].name && <UploadDocumentsStudent />}
+        {currentTab === tabs[0].urlName && <Details />}
+        {currentTab === tabs[1].urlName && <UploadDocumentsStudent />}
       </div>
     </div>
   );

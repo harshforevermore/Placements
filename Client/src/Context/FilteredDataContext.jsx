@@ -8,7 +8,6 @@ const FilteredDataProvider = ({ children }) => {
   useEffect(() => {
     // getting the user from the local storage(if exists!) on page reload.
     const storedData = JSON.parse(sessionStorage.getItem("filteredData"));
-    console.info("Stored user: ", storedData);
     try {
       if (storedData) {
         setFilteredData(storedData);
@@ -20,15 +19,12 @@ const FilteredDataProvider = ({ children }) => {
   }, []);
 
   function filterDataByConditions(conditions) {
-    console.log("filterData Function executed.");
-    console.log("filteredData: ", filteredData);
     const data = filterByConditions(conditions);
     setFilteredData(data);
     setToSessionStorage(data);
   }
   const filterByConditions = (conditions) => {
     // if (!conditions || typeof conditions !== "object") return [];
-    console.log(conditions);
     return fakeStudents.filter((student) => {
       const courseMatch = student.course === conditions.course;
       const sectionMatch = student.section === conditions.section;

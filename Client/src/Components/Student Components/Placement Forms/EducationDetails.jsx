@@ -1,4 +1,3 @@
-import React from "react";
 import Input from "../../Form Components/Input";
 
 const EducationDetails = () => {
@@ -45,6 +44,15 @@ const EducationDetails = () => {
             maxLength={4}
             pattern={/^(19[5-9]\d|20[0-9]\d)$/}
             patternMessage="Invalid Year"
+            containerClasses="flex-1"
+          />
+          <Input
+            label="10th Medium"
+            name="medium10"
+            placeholder="10th Medium"
+            minLength={2}
+            maxLength={50}
+            pattern={/^[A-Za-z\s]+$/}
             containerClasses="flex-1"
           />
           <Input
@@ -97,6 +105,15 @@ const EducationDetails = () => {
             containerClasses="flex-1"
           />
           <Input
+            label="12th Medium"
+            name="medium12"
+            placeholder="12th Medium"
+            minLength={2}
+            maxLength={50}
+            pattern={/^[A-Za-z\s]+$/}
+            containerClasses="flex-1"
+          />
+          <Input
             label="12th Board Name"
             name="boardName12"
             placeholder="12th Board Name"
@@ -144,6 +161,15 @@ const EducationDetails = () => {
               maxLength={4}
               pattern={/^(19[5-9]\d|20[0-9]\d)$/}
               patternMessage="Invalid Year"
+              containerClasses="flex-1"
+            />
+            <Input
+              label="UG Medium"
+              name="mediumUG"
+              placeholder="UG Medium"
+              minLength={2}
+              maxLength={50}
+              pattern={/^[A-Za-z\s]+$/}
               containerClasses="flex-1"
             />
             <Input

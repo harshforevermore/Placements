@@ -8,6 +8,7 @@ const FileInput = ({
   maxUploadSize = "200Kb",
   minUploadSize = "20Kb",
   required = true,
+  setFile,
 }) => {
   const {
     register,
@@ -26,12 +27,14 @@ const FileInput = ({
         <input
           {...register(name, {
             required: { value: required, message: "This document is required" },
+            validate: {size: (files) => !files[0] || files[0].size < 200 * 1024 || "Max file size is 200KB"}
           })}
           className="text-md text-stone-600 file:mr-2 file:py-1 file:px-2 file:border-1 file:border-slate-700 file file:text-sm file:font-medium file:text-stone-700 file:rounded-md hover:file:cursor-pointer hover:file:bg-gray-100"
           aria-describedby="input_desc"
           id={`${name}-file`}
           accept="application/pdf"
           type="file"
+          onChange={(e)=> setFile(e.target.files[0])}
         />
       </section>
       <section className="desc-error-section w-full flex gap-2">

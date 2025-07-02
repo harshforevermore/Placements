@@ -12,6 +12,7 @@ const Profile = () => {
           <p className="text-xl text-gray-600 font-medium">Name: <span className="text-gray-800 font-medium">{userDetails.fullname}</span></p>
           <p className="text-xl text-gray-600 font-medium">Roll No.: <span className="text-gray-800 font-medium">{userDetails.regNo}</span></p>
           <p className="text-xl text-gray-600 font-medium">Course: <span className="text-gray-800 font-medium">{userDetails.course}</span></p>
+          <p className="text-xl text-gray-600 font-medium">Section: <span className="text-gray-800 font-medium">{userDetails.section}</span></p>
           <p className="text-xl text-gray-600 font-medium">Email: <span className="text-gray-800 font-medium">{userDetails.email}</span></p>
         </div>
       ) : (

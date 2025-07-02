@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
-// import axios from "axios";
+import axios from "axios";
 import { useLoader } from "../Context/LoaderContext";
 import { useNotification } from "../Context/NotificationContext";
-import {fakeAdmin} from "../Data/data.js";
+import {fakeUser} from "../Data/data.js";
 
 const LoginComponent = ({ fancy }) => {
   // useContext hook
@@ -27,7 +27,7 @@ const LoginComponent = ({ fancy }) => {
   const onSubmit = (data) => {
     showLoader();
     if(data.username == "oresama" && data.password == "oresama") {
-      login(fakeAdmin);
+      login(fakeUser);
       navigate("/dashboard");
       hideLoader();
       showNotification("Logged in Successfully", "success");

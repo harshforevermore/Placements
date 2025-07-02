@@ -1,7 +1,32 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const UploadDocumentsStudent = () => {
-  const [toUpload, setToUpload] = useState(undefined);
+
+  const docs = [
+    {
+      documentName: "smth",
+      status: "Active",
+      documentType: "PDF",
+      lastDate: "12-12-2025",
+      closingTime: "12:00 P.M."
+    },
+    {
+      documentName: "smth",
+      status: "Active",
+      documentType: "JPEG",
+      lastDate: "12-12-2025",
+      closingTime: "12:00 P.M."
+    },
+    {
+      documentName: "smth",
+      status: "Expired",
+      documentType: "pdf",
+      lastDate: "12-12-2025",
+      time: "12:00 P.M."
+    },
+  ]
+
+  const [toUpload, setToUpload] = useState(docs);
   return (
     <div className="upload-documents-container w-full p-3 md:px-20 mt-5 flex flex-wrap gap-4">
       {toUpload ? (
@@ -9,7 +34,7 @@ const UploadDocumentsStudent = () => {
           return (
             <section
               key={index}
-              className="uploaded-documents-container cursor-pointer flex-1 min-w-[340px] max-w-[50%] p-6 border-1 border-stone-300 rounded-lg shadow-md"
+              className="uploaded-documents-container cursor-pointer flex-1 min-w-[340px] max-w-[50%] p-6 border-1 border-stone-300 rounded-lg shadow-md hover:shadow-[0_0_5px_gray] transition-all duration-150 ease-in-out"
             >
               <p className="doc-title block text-[1.4em] font-medium">
                 {document.documentName}

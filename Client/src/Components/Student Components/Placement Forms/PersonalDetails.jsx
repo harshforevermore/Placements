@@ -1,9 +1,11 @@
-import React from "react";
-// import { useForm } from "react-hook-form";
+import { useContext } from "react";
 import Input from "../../Form Components/Input";
 import RadioButton from "../../Form Components/RadioButton";
+import { AuthContext } from "../../../Context/AuthContext";
 
 const PersonalDetails = () => {
+  const {user} = useContext(AuthContext);
+
   return (
     <div className="personal-details-container bg-transparent w-full py-4 px-4 flex flex-col gap-2">
       <h1 className="w-full mb-2 text-2xl text-red-500 font-bold">
@@ -14,6 +16,8 @@ const PersonalDetails = () => {
           label="Name"
           name="name"
           placeholder="Name"
+          value={user.fullname}
+          disabled={true}
           minLength={2}
           maxLength={100}
           pattern={/^[A-Za-z\s]+$/}
@@ -50,7 +54,6 @@ const PersonalDetails = () => {
         />
         <Input
           label="Date of Birth: "
-          // labelFixed={true}
           name="DOB"
           placeholder="Date Of Birth"
           type="date"
@@ -113,9 +116,9 @@ const PersonalDetails = () => {
           containerClasses="flex-1"
         />
         <Input
-          label="Aadhaar Number"
-          name="aadhaarNumber"
-          placeholder="Aadhaar Number"
+          label="Aadhar Number"
+          name="aadharNumber"
+          placeholder="Aadhar Number"
           minLength={12}
           maxLength={12}
           pattern={/^\d{12}$/}
@@ -155,9 +158,9 @@ const PersonalDetails = () => {
         containerClasses="flex-1"
         />
       <Input
-        label="Permanent Address as per Aadhaar Card"
-        name="permanentAadhaarAddress"
-        placeholder="Permanent Address as per Aadhaar Card"
+        label="Permanent Address as per Aadhar Card"
+        name="permanentAadharAddress"
+        placeholder="Permanent Address as per Aadhar Card"
         minLength={10}
         maxLength={255}
         pattern={/^[A-Za-z0-9\s,.-/]{10,255}$/}
