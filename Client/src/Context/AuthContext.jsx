@@ -9,7 +9,6 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     // getting the user from the local storage(if exists!) on page reload.
     const storedUser = JSON.parse(sessionStorage.getItem("user"));
-    console.info("Stored user: ", storedUser);
     try {
       if (storedUser) {
         setUser(storedUser);

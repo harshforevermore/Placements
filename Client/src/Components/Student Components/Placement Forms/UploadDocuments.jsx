@@ -1,7 +1,6 @@
-import React from "react";
 import FileInput from "../../Form Components/FileInput";
 
-const UploadDocuments = () => {
+const UploadDocuments = ({setAadharCard, setMarksheet10, setMarksheet12}) => {
   return (
     <div className="education-details-container bg-transparent w-full py-4 px-4 flex flex-col gap-2">
       <h1 className="mb-2 text-2xl text-red-500 font-bold">Upload Documents</h1>
@@ -9,14 +8,17 @@ const UploadDocuments = () => {
         <FileInput
             name="aadhaarCard"
             label="Aadhaar Card"
-        />
+            setFile={setAadharCard}
+            />
         <FileInput
             name="marksheet10"
             label="10th Marksheet"
-        />
+            setFile={setMarksheet10}
+            />
         <FileInput
             name="marksheet12"
             label="12th Marksheet"
+            setFile={setMarksheet12}
         />
       </section>
     </div>

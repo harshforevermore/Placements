@@ -2,9 +2,10 @@ export const fakeUser = {
   fullname: "Who Knows",
   regNo: "24MCAN0304",
   course: "MCA",
+  section: "E",
   email: "smth.2@gmail.com",
   role: "student",
-  placementRegistered: true,
+  placementRegistered: false,
 };
 export const fakeStudents = [
   {
