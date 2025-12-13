@@ -16,7 +16,7 @@ const PersonalDetails = () => {
           label="Name"
           name="name"
           placeholder="Name"
-          value={user.fullname}
+          value={user.fullName}
           disabled={true}
           minLength={2}
           maxLength={100}

@@ -60,7 +60,6 @@ const LoginComponent = ({ fancy }) => {
   //         `Server Error: ${response.status}, ${response.statusText}`
   //       );
   //     }
-  //     console.info("worked");
   //     showNotification("Logged In Successfully", "success");
   //     login(response.data);
   //     navigate("/home");

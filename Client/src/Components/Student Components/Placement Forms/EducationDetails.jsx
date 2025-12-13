@@ -124,7 +124,7 @@ const EducationDetails = () => {
           />
         </section>
       </section>
-      {course === "MCA" && (
+      {course.toUpperCase() === "MCA" && (
         <section className="graduation-details">
           <h1 className="mb-4 text-xl text-red-500 font-medium">
             Under Graduation

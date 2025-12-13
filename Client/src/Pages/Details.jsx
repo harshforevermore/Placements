@@ -1,4 +1,3 @@
-import React from "react";
 import PlacementRegistration from "./PlacementRegistration";
 import AlreadyRegistered from "../Components/Student Components/AlreadyRegistered";
 

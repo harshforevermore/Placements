@@ -3,6 +3,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useNotification } from "../Context/NotificationContext";
 import Input from "../Components/Form Components/Input";
+import { useLoader } from "../Context/LoaderContext";
 
 const RegisterComponent = () => {
   //useForm hook
@@ -11,12 +12,17 @@ const RegisterComponent = () => {
   const comparePass = (getValues) => (value) => value === getValues("password") || "passwords do not match";
   
   const { showNotification } = useNotification();
+  const {showLoader, hideLoader} = useLoader();
+
   const navigate = useNavigate();
   const onSubmit = async (data) => {
+
+    showLoader();
+
     const registerationData = {
-      fullName: data.name,
+      name: data.name,
       regNo: data.username,
-      collegeEmail: data.email,
+      email: data.email,
       course: data.course,
       section: data.section,
       password: data.password,
@@ -30,9 +36,11 @@ const RegisterComponent = () => {
           headers: { "Content-type": "application/json" },
         }
       );
-      if (response.status >= 200 && response.status < 300) {
-        navigate("/login");
+      if (!(response.status >= 200 && response.status < 300)) {
+        throw new Error(`login in failed! ${response.statusText}`);
       }
+      navigate("/login");
+      hideLoader();
     } catch (error) {
       console.error("Error:", error.message);
       if (axios.isAxiosError(error)) {
@@ -47,6 +55,7 @@ const RegisterComponent = () => {
       } else {
         console.error("Unexpected error:", error);
       }
+      hideLoader();
     }
   };
   return (
@@ -103,7 +112,7 @@ const RegisterComponent = () => {
             minLength={5}
             maxLength={15}
             pattern={/^(?=.*[A-Z])(?=.*\d).{5,15}$/}
-            patternMessage="Invalid"
+            patternMessage="Must be 5–15 characters long, include at least one uppercase letter and one number."
           />
           <Input
             name="confirmPass"

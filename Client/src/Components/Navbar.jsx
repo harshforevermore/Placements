@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../images/JU_logo.png";
 import { AuthContext } from "../Context/AuthContext";
 import {useNotification} from "../Context/NotificationContext";
 
@@ -16,13 +15,13 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="navbar fixed top-0 left-0 z-50 flex w-full shadow-[0_0_5px_gray] px-4 bg-[#ff0000] text-white">
+    <nav className="navbar fixed top-0 left-0 z-50 flex w-full shadow-[0_0_5px_gray] px-4 pl-1 bg-[#ff0000] text-white">
       <ul className="nav-list flex w-full h-16 items-center justify-between">
-        <li className="nav-item-1 h-fit">
+        <li className="nav-item-1 h-15 p-2">
           <img
-            src={logo}
+            src="/Logo-cropped.png"
             alt="JECRC_logo"
-            className="w-full h-15 clip-path-circle"
+            className="w-full h-full object-contain"
           />
         </li>
         <li className="nav-item-2 h-fit">

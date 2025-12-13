@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import FancyLogin from "./FancyLogin";
 import FancyRegister from "./FancyRegister";
-import LoginCover from "../Components/Form Components/LoginCover";
+import LoginCover from "./LoginCover";
 
 const FancyAuth = () => {
   const [show, setShow] = useState("login");

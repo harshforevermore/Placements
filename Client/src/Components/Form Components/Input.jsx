@@ -6,7 +6,7 @@ const Input = ({
   // labelFixed = true,
   required=true,
   disabled=false,
-  value="",
+  value=undefined,
   type = "text",
   // placeholder = "",
   autocomplete = "off",
@@ -77,7 +77,7 @@ const Input = ({
         />
       </div>
       {errors[name] && (
-        <span className="select-none text-sm text-red-600 text-center">
+        <span className="select-none max-w-70 text-sm text-red-600 text-center text-wrap">
           {errors[name].message}
         </span>
       )}
